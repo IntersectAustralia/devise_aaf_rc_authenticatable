@@ -1,24 +1,29 @@
 development:
   user-mapping: {name: "LAST-NAME", email: "mail"}
+  hostname: ""
   secret_token: ""
   aaf_rc_login_url: ""
 
 qa:
   user-mapping: {name: "LAST-NAME", email: "mail"}
+  hostname: ""
   secret_token: ""
   aaf_rc_login_url: ""
 
 staging:
   user-mapping: {name: "LAST-NAME", email: "mail"}
+  hostname: ""
   secret_token: ""
   aaf_rc_login_url: ""
 
 test:
   user-mapping: {name: "LAST-NAME", email: "mail"}
-   secret_token: ""
- aaf_rc_login_url: ""
+  hostname: ""
+  secret_token: ""
+  aaf_rc_login_url: ""
 
 production:
   user-mapping: {name: "LAST-NAME", email: "mail"}
+  hostname: ""
   secret_token: ""
   aaf_rc_login_url: ""
