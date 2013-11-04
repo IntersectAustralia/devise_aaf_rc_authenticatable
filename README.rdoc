@@ -1,0 +1,62 @@
+= devise_aaf_rc_authenticatable
+
+Devise AAF Rapid Connect Authenticatable is an authentication strategy for the Devise[http://github.com/plataformatec/devise] authentication framework.
+
+This is customised for Intersect Australia.
+
+== Prerequisites
+* devise ~> 1.5.4 (which requires rails ~> 3.1)
+
+== Usage
+In the Gemfile for your application:
+
+    gem "devise_aaf_rc_authenticatable"
+
+To get the latest version, pull directly from github instead of the gem:
+
+    gem "devise_aaf_rc_authenticatable", :git => "git://github.com/IntersectAustralia/devise_aaf_rc_authenticatable.git"
+
+== Setup
+Run the rails generators for devise (please check the devise[http://github.com/plataformatec/devise] documents for further instructions)
+
+    rails generate devise:install
+    rails generate devise MODEL_NAME
+
+Run the rails generator for 'devise_aaf_rc_authenticatable'
+
+    rails generate devise_aaf_rc_authenticatable:install
+
+== Configuration
+In initializer 'config/initializers/devise.rb' :
+
+* config.aaf_rc_logger <em>(default: true)</em>
+* config.aaf_rc_create_user <em>(default: true)</em>
+* config.aaf_rc_config <em>(default:#{Rails.root}/config/aaf_rc.yml)</em>
+
+In configuration 'config/aaf_rc.yml' :
+
+* user-mapping
+  * A hash-map of the AAF attributes that you want saved to your User model.
+
+* aaf_rc_login_url
+  * The URL to your AAF IdP
+
+== Contributing to devise_aaf_rc_authenticatable
+
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== References
+* Devise[http://github.com/plataformatec/devise]
+* AAF Rapid Connect[http://rapid.aaf.edu.au]
+
+== Copyright
+
+Copyright (c) 2013 Intersect Australia Limited. See LICENSE.txt for
+further details.
+

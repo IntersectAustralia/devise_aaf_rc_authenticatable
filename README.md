@@ -1,4 +1,4 @@
 devise_aaf_rc_authenticatable
 =============================
 
-A Ruby on Rails gem to allow authentication with Devise + AAF Rapid Connect
+Devise AAF Rapid Connect Authenticatable is an authentication strategy for the Devise[http://github.com/plataformatec/devise] authentication framework.
