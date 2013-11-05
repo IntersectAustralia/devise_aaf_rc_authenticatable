@@ -2,7 +2,7 @@ require 'devise_aaf_rc_authenticatable/strategy'
 
 module Devise
   module Models
-    module DeviseAafRcAuthenticatable
+    module AafRcAuthenticatable
       extend ActiveSupport::Concern
 
       # Need to determine why these need to be included
@@ -25,10 +25,11 @@ module Devise
       end
 
       module ClassMethods
-        def authenticate_with_aaf_rc(headers)
+        def authenticate_with_aaf_rc(attributes)
 
           auth_key = self.authentication_keys.first
-          auth_key_value = (self.case_insensitive_keys || []).include?(auth_key) ? headers['email'].downcase : headers['email']
+          #use config to specify which key to use
+          auth_key_value = (self.case_insensitive_keys || []).include?(auth_key) ? attributes['mail'].downcase : attributes['mail']
 
           resource = where(auth_key => auth_key_value).first
 
@@ -40,7 +41,7 @@ module Devise
           if (resource.nil? && Devise.aaf_rc_create_user)
             logger.info("Creating user(#{auth_key_value}).")
             resource = new
-            save_user_aaf_rc_headers(resource, headers)
+            save_user_aaf_rc_attributes(resource, attributes)
             resource.save
           end
 
@@ -48,13 +49,13 @@ module Devise
         end
 
         private
-        def save_user_aaf_rc_headers(user, headers)
+        def save_user_aaf_rc_attributes(resource, attributes)
           config = YAML.load(ERB.new(File.read(::Devise.aaf_rc_config || "#{Rails.root}/config/aaf_rc.yml")).result)[Rails.env]
-          config['user-mapping'].each do |model, header|
-            logger.info("Saving #{headers[header]} to #{model}")
-            field = "#{model}="
-            value = headers[header]
-            user.send(field, value.to_s)
+          config['user-mapping'].each do |aaf_attr, db_field|
+            logger.info("Saving #{attributes[aaf_attr]} to #{db_field}")
+            field = "#{db_field}="
+            value = attributes[aaf_attr]
+            resource.send(field, value.to_s) if resource.respond_to?(field)
           end
         end
       end

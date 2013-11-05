@@ -1,29 +1,43 @@
+common: &common
+  # this is to map attributes as described in http://aaf.edu.au/technical/aaf-core-attributes/
+  # to their respective field in the database
+  # uncomment them if need be
+  user-mapping:
+    cn: ""
+    displayname: ""
+    edupersontargetedid: ""
+    edupersonscopedaffiliation: ""
+    edupersonprincipalname: ""
+    mail: email
+    givenname: first_name
+    surname: last_name
+
 development:
-  user-mapping: {name: "LAST-NAME", email: "mail"}
-  hostname: ""
-  secret_token: ""
-  aaf_rc_login_url: ""
+  <<: *common
+  hostname: hostname.com
+  secret_token: REPLACE_ME
+  aaf_rc_login_url: https://rapid.test.aaf.edu.au/jwt/authnrequest/research/REPLACE_ME
 
 qa:
-  user-mapping: {name: "LAST-NAME", email: "mail"}
-  hostname: ""
-  secret_token: ""
-  aaf_rc_login_url: ""
+  <<: *common
+  hostname: hostname.com
+  secret_token: REPLACE_ME
+  aaf_rc_login_url: https://rapid.test.aaf.edu.au/jwt/authnrequest/research/REPLACE_ME
 
 staging:
-  user-mapping: {name: "LAST-NAME", email: "mail"}
-  hostname: ""
-  secret_token: ""
-  aaf_rc_login_url: ""
+  <<: *common
+  hostname: hostname.com
+  secret_token: REPLACE_ME
+  aaf_rc_login_url: https://rapid.test.aaf.edu.au/jwt/authnrequest/research/REPLACE_ME
 
 test:
-  user-mapping: {name: "LAST-NAME", email: "mail"}
-  hostname: ""
-  secret_token: ""
-  aaf_rc_login_url: ""
+  <<: *common
+  hostname: hostname.com
+  secret_token: REPLACE_ME
+  aaf_rc_login_url: https://rapid.test.aaf.edu.au/jwt/authnrequest/research/REPLACE_ME
 
 production:
-  user-mapping: {name: "LAST-NAME", email: "mail"}
-  hostname: ""
-  secret_token: ""
-  aaf_rc_login_url: ""
+  <<: *common
+  hostname: hostname.com
+  secret_token: REPLACE_ME
+  aaf_rc_login_url: https://rapid.aaf.edu.au/jwt/authnrequest/research/REPLACE_ME
