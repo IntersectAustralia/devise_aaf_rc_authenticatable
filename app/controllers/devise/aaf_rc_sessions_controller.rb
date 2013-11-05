@@ -22,8 +22,4 @@ class Devise::AafRcSessionsController < Devise::SessionsController
     super
   end
 
-  def extra_validations(attributes)
-    false
-  end
-
 end
