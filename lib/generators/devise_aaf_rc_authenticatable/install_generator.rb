@@ -11,6 +11,10 @@ module DeviseAafRcAuthenticatable
     def create_aaf_rc_config
       copy_file "aaf_rc.yml", "config/aaf_rc.yml"
     end
+
+    def copy_locale
+      copy_file "../../../config/locales/en.yml", "config/locales/devise_aaf_rc.en.yml"
+    end
     
     def create_default_devise_settings
       inject_into_file "config/initializers/devise.rb", default_devise_settings, :after => "Devise.setup do |config|\n"   
