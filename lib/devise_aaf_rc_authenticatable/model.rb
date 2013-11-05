@@ -24,11 +24,16 @@ module Devise
         result
       end
 
+      # Hook called after AAF authentication.
+      def after_aaf_rc_authentication
+      end
+
       module ClassMethods
-        def authenticate_with_aaf_rc(attributes)
+
+        def authenticate_with_aaf_rc(attributes={})
 
           auth_key = self.authentication_keys.first
-          #use config to specify which key to use
+
           auth_key_value = (self.case_insensitive_keys || []).include?(auth_key) ? attributes['mail'].downcase : attributes['mail']
 
           resource = where(auth_key => auth_key_value).first
@@ -42,6 +47,7 @@ module Devise
             logger.info("Creating user(#{auth_key_value}).")
             resource = new
             save_user_aaf_rc_attributes(resource, attributes)
+            resource.aaf_rc_before_save if resource.respond_to?(:aaf_rc_before_save)
             resource.save
           end
 
