@@ -6,16 +6,21 @@ module Devise
   module Strategies
     class AafRcAuthenticatable < Authenticatable
 
+      def valid?
+        params["assertion"].present? || session["jwt"].present?
+      end
+
+
       def authenticate!
 
-        jws = params[:assertion]
+        jws = params["assertion"]
 
         if jws
           begin
 
             config = YAML.load(ERB.new(File.read(::Devise.aaf_rc_config || "#{Rails.root}/config/aaf_rc.yml")).result)[Rails.env]
 
-            jwt = JSON::JWT.decode(jws.to_s, config['server_token'])
+            jwt = JSON::JWT.decode(jws.to_s, config['secret_token'])
             aaf_host = config['aaf_rc_login_url'][/^https:\/\/[\w\.]+/] if config['aaf_rc_login_url']
             aaf_host ||= "https://rapid.aaf.edu.au"
 

@@ -2,7 +2,6 @@ class Devise::AafRcSessionsController < Devise::SessionsController
   unloadable
   prepend_before_filter :require_no_authentication, :only => [:aaf_new, :aaf_create]
   prepend_before_filter :allow_params_authentication!, :only => :aaf_create
-  before_filter :authenticate_user!
 
   def aaf_new
     config = YAML.load(ERB.new(File.read(::Devise.aaf_rc_config || "#{Rails.root}/config/aaf_rc.yml")).result)[Rails.env]
