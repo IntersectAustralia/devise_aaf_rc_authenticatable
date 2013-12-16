@@ -13,7 +13,7 @@ module DeviseAafRcAuthenticatable
     end
 
     def copy_locale
-      copy_file "../../../config/locales/en.yml", "config/locales/devise_aaf_rc.en.yml"
+      copy_file "/Users/jake/Projects/devise_aaf_rc_authenticatable/config/locales/en.yml", "config/locales/devise_aaf_rc.en.yml"
     end
     
     def create_default_devise_settings

@@ -4,7 +4,7 @@ class Devise::AafRcSessionsController < Devise::SessionsController
   prepend_before_filter :allow_params_authentication!, :only => :aaf_create
 
   def aaf_new
-    config = YAML.load(ERB.new(File.read(::Devise.aaf_rc_config || Rails.root.join('config', 'aaf_rc.yml').to_s)).result)[Rails.env]
+    config = YAML.load(ERB.new(File.read(::Devise.aaf_rc_config || "/Users/jake/Projects/snap-deploy/config/aaf_rc.yml")).result)[Rails.env]
 
     redirect_to config['aaf_rc_login_url']
   end

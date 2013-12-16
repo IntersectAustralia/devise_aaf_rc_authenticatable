@@ -5,6 +5,7 @@ require 'devise_aaf_rc_authenticatable/exception'
 require 'devise_aaf_rc_authenticatable/logger'
 require 'devise_aaf_rc_authenticatable/schema'
 require 'devise_aaf_rc_authenticatable/routes'
+require 'devise_aaf_rc_authenticatable/railtie'
 
 begin
   Rails::Engine
@@ -27,7 +28,7 @@ module Devise
   @@aaf_rc_create_user = false
   
   mattr_accessor :aaf_rc_config
-  @@aaf_rc_config = Rails.root.join('config', 'aaf_rc.yml').to_s
+  @@aaf_rc_config = "/Users/jake/Projects/snap-deploy/config/aaf_rc.yml"
   
 end
 
