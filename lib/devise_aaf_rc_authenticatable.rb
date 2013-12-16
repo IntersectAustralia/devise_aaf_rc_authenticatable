@@ -27,7 +27,7 @@ module Devise
   @@aaf_rc_create_user = false
   
   mattr_accessor :aaf_rc_config
-  @@aaf_rc_config = "#{Rails.root}/config/aaf_rc.yml"
+  @@aaf_rc_config = Rails.root.join('config', 'aaf_rc.yml').to_s
   
 end
 
