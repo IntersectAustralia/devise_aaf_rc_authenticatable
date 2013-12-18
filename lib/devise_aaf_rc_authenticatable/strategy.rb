@@ -7,7 +7,7 @@ module Devise
     class AafRcAuthenticatable < Authenticatable
 
       def valid?
-        params["assertion"].present? || session["jwt"].present?
+        params["assertion"].present? || (session["jwt"].present? && !session["jwt_unauthorized"].present? )
       end
 
 
@@ -45,7 +45,12 @@ module Devise
         resource = mapping.to.authenticate_with_aaf_rc(session[:attributes])
 
         if validate(resource)
-          resource.after_aaf_rc_authentication
+          begin
+            resource.after_aaf_rc_authentication
+            session.delete(:jwt_unauthorized)
+          rescue Exception
+            session["jwt_unauthorized"] = 'Unauthorized'
+          end
           success!(resource)
         elsif !halted?
           fail(:invalid)

@@ -16,9 +16,16 @@ class Devise::AafRcSessionsController < Devise::SessionsController
     respond_with resource, :location => after_sign_in_path_for(resource)
   end
 
+  def aaf_destroy
+    session.delete(:attributes)
+    session.delete(:jwt)
+    session.delete(:jwt_unauthorized)
+  end
+
   def destroy
     session.delete(:attributes)
     session.delete(:jwt)
+    session.delete(:jwt_unauthorized)
     super
   end
 
