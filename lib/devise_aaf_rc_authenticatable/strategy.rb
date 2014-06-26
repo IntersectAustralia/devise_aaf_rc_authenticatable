@@ -7,14 +7,12 @@ module Devise
     class AafRcAuthenticatable < Authenticatable
 
       def valid?
-        params["assertion"].present? || (session["jwt"].present? && !session["jwt_unauthorized"].present? )
+        params["assertion"].present? || (session["jwt"].present? && !session["jwt_unauthorized"].present?)
       end
 
-
       def authenticate!
-
+        # params["assertion"] is checked for presence in valid? method.
         jws = params["assertion"]
-
         if jws
           begin
 
@@ -25,21 +23,23 @@ module Devise
             aaf_host ||= "https://rapid.aaf.edu.au"
 
             # In a complete app we'd also store and validate the jti value to ensure there is no replay attack
-            if jwt['iss'] == aaf_host && jwt['aud'] == config['hostname'] && Time.now > Time.at(jwt['nbf']) && Time.now < Time.at(jwt['exp'])
-              attributes = jwt['https://aaf.edu.au/attributes']
-              session[:attributes] = attributes
-              session[:jwt] = jwt
+            if jwt['iss'] == aaf_host && jwt['aud'] == config['hostname']
+              current_time = Time.now
+              if current_time > Time.at(jwt['nbf']) && current_time < Time.at(jwt['exp'])
+                session[:attributes] = jwt['https://aaf.edu.au/attributes']
+                session[:jwt] = jwt
+              else
+                logger.error(" Timing is invalid. #{current_time} out of range of #{Time.at(jwt['nbf'])} to #{Time.at(jwt['exp'])}")
+                return fail(:invalid_timing)
+              end
             else
-              #TODO raise devise authentication error
-              #halt 500, "Audience or timings are invalid"
+              logger.error(" Audience is invalid. #{jwt['aud']} vs #{config['hostname']}")
+              return fail(:invalid_audience)
             end
           rescue Exception => e
-            #TODO raise devise authentication error
-            #halt 500, "Signature was invalid or JWT was otherwise erroneous"
+            logger.error(" Signature was invalid or JWT was otherwise erroneous. #{e.message}")
+            return fail(:invalid_jwt)
           end
-        else
-          #TODO raise devise authentication error
-          #halt 500, "JWS was not found in request"
         end
 
         resource = mapping.to.authenticate_with_aaf_rc(session[:attributes])
