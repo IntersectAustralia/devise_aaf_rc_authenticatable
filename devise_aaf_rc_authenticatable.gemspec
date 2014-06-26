@@ -56,6 +56,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov>, [">= 0"])
       s.add_development_dependency(%q<json>, [">= 0"])
       s.add_development_dependency(%q<json-jwt>, [">= 0"])
+      s.add_development_dependency(%q<builder>, [">= 0"])
       s.add_runtime_dependency(%q<devise>, [">= 1.5.4"])
     else
       s.add_dependency(%q<shoulda>, [">= 0"])
@@ -64,6 +65,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<simplecov>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<json-jwt>, [">= 0"])
+      s.add_dependency(%q<builder>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 1.5.4"])
     end
   else
@@ -73,6 +75,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<simplecov>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<json-jwt>, [">= 0"])
+    s.add_dependency(%q<builder>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 1.5.4"])
   end
 end
