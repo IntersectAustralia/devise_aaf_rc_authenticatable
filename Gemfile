@@ -7,4 +7,5 @@ group :development do
   gem "simplecov", ">= 0"
   gem "json", ">= 0"
   gem "json-jwt", ">= 0"
+  gem "builder", ">= 0"
 end

@@ -4,6 +4,7 @@ GEM
     activesupport (3.2.15)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    builder (3.2.2)
     git (1.2.5)
     i18n (0.6.5)
     jeweler (1.6.4)
@@ -33,6 +34,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  builder
   bundler (>= 1.0.0)
   jeweler (~> 1.6.4)
   json
