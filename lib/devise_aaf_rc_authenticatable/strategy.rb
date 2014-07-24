@@ -10,6 +10,10 @@ module Devise
         params["assertion"].present? || (session["jwt"].present? && !session["jwt_unauthorized"].present?)
       end
 
+      def logger
+        Rails.logger
+      end
+
       def authenticate!
         # params["assertion"] is checked for presence in valid? method.
         jws = params["assertion"]
