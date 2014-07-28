@@ -48,6 +48,11 @@ module Devise
 
         resource = mapping.to.authenticate_with_aaf_rc(session[:attributes])
 
+        if resource.nil?
+          fail(:invalid_user_attributes)
+          return
+        end
+
         if resource.local_user?
           fail(:local_user_exist)
           return

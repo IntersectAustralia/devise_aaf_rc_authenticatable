@@ -51,7 +51,11 @@ module Devise
             resource.save
           end
 
-          resource
+          if resource.persisted?
+            resource
+          else
+            nil
+          end
         end
 
         private
