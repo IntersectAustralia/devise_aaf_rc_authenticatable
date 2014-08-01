@@ -19,6 +19,10 @@ module Devise
             config = YAML.load(ERB.new(File.read(::Devise.aaf_rc_config || "#{Rails.root}/config/aaf_rc.yml")).result)[Rails.env]
 
             jwt = JSON::JWT.decode(jws.to_s, config['secret_token'])
+
+            # determines between test and production federation
+            # based on the login URL provided during registration
+
             aaf_host = config['aaf_rc_login_url'][/^https:\/\/[\w\.]+/] if config['aaf_rc_login_url']
             aaf_host ||= "https://rapid.aaf.edu.au"
 
