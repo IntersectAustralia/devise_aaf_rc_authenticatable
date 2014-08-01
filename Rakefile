@@ -32,8 +32,8 @@ begin
     gemspec.email = ["gabriel@intersect.org.au", "shuqian@intersect.org.au", "danielt@intersect.org.au", "jake@intersect.org.au"]
     gemspec.homepage = "http://github.com/IntersectAustralia/devise_aaf_rc_authenticatable"
     gemspec.authors = ["Gabriel Gasser Noblia", "Shuqian Hon", "Daniel Theodosius", "Jake Farrell"]
-    gemspec.add_runtime_dependency "devise", ">= 1.5.4"
-    gemspec.version = "0.0.3"
+    gemspec.add_runtime_dependency "devise", ">= 2.2.4"
+    gemspec.version = "0.0.4"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
