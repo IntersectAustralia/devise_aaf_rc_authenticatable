@@ -33,15 +33,15 @@ module Devise
                 session[:attributes] = jwt['https://aaf.edu.au/attributes']
                 session[:jwt] = jwt
               else
-                logger.error(" Timing is invalid. #{current_time} out of range of #{Time.at(jwt['nbf'])} to #{Time.at(jwt['exp'])}")
+                Rails.logger.error(" Timing is invalid. #{current_time} out of range of #{Time.at(jwt['nbf'])} to #{Time.at(jwt['exp'])}")
                 return fail(:invalid_timing)
               end
             else
-              logger.error(" Audience is invalid. #{jwt['aud']} vs #{config['hostname']}")
+              Rails.logger.error(" Audience is invalid. #{jwt['aud']} vs #{config['hostname']}")
               return fail(:invalid_audience)
             end
           rescue Exception => e
-            logger.error(" Signature was invalid or JWT was otherwise erroneous. #{e.message}")
+            Rails.logger.error(" Signature was invalid or JWT was otherwise erroneous. #{e.message}")
             return fail(:invalid_jwt)
           end
         end
