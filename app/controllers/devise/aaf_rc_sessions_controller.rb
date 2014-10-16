@@ -17,9 +17,7 @@ class Devise::AafRcSessionsController < Devise::SessionsController
   end
 
   def aaf_destroy
-    session.delete(:attributes)
-    session.delete(:jwt)
-    session.delete(:jwt_unauthorized)
+    destroy
   end
 
   def destroy
