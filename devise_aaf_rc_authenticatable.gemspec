@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Gabriel Gasser Noblia", "Shuqian Hon", "Daniel Theodosius", "Jake Farrell"]
-  s.date = "2014-08-01"
+  s.date = "2014-10-16"
   s.description = "Devise AAF Rapid Connect Authenticatable is an authentication strategy for the Devise[http://github.com/plataformatec/devise] authentication framework."
   s.email = ["gabriel@intersect.org.au", "shuqian@intersect.org.au", "danielt@intersect.org.au", "jake@intersect.org.au"]
   s.extra_rdoc_files = [
