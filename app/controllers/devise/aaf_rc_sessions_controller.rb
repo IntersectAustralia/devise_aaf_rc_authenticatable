@@ -16,10 +16,6 @@ class Devise::AafRcSessionsController < Devise::SessionsController
     respond_with resource, :location => after_sign_in_path_for(resource)
   end
 
-  def aaf_destroy
-    redirect_to :destroy
-  end
-
   def destroy
     session.delete(:attributes)
     session.delete(:jwt)
