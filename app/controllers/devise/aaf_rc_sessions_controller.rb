@@ -17,7 +17,7 @@ class Devise::AafRcSessionsController < Devise::SessionsController
   end
 
   def aaf_destroy
-    destroy
+    redirect_to :destroy
   end
 
   def destroy
