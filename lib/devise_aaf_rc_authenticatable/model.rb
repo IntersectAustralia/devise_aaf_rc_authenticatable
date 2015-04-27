@@ -36,7 +36,7 @@ module Devise
 
           auth_key_value = (self.case_insensitive_keys || []).include?(auth_key) ? attributes['mail'].downcase : attributes['mail']
 
-          resource = where(auth_key => auth_key_value).first
+          resource = find_for_authentication(auth_key => auth_key_value)
 
           if (resource.nil? && !Devise.aaf_rc_create_user)
             Rails.logger.info("User(#{auth_key_value}) not found.  Not configured to create the user.")
